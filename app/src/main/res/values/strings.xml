@@ -59,4 +59,17 @@
     <string name="option_vizag">Visakhapatnam</string>
     <string name="mesg_enter_your_ans">Please enter your answer</string>
     <string name="mesg_select_option">Please select the option</string>
+    <string name="label_continue">Continue</string>
+    <string name="label_view_answer">View Answer</string>
+    <string name="mesg_weldone">Well Done! %s</string>
+    <string name="mesg_tryagain">Try Again !</string>
+    <string name="label_answer">Answer : %s</string>
+    <string name="label_tryagain">Try Again</string>
+    <string name="preference_score">Score</string>
+    <string name="label_score">Score</string>
+    <string name="label_your_score">Your Score out of 10</string>
+    <string name="label_home">Home</string>
+    <string name="thankyou_mesg">Thank you, your valuable feedback and suggestions would be appreciated.</string>
+    <string name="int_resource">%d</string>
+    <string name="mesg_congrats">Hey %s Congrats on completing the Quiz.</string>
 </resources>

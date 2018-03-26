@@ -27,22 +27,22 @@ public class ImageHelper {
         return instance;
     }
 
-    public Bitmap getCompressedImage(Context context,int image){
+    public Bitmap getCompressedImage(Context context, int image) {
         this.context = context;
-        Bitmap bitmapMaster = compressBitmap(BitmapFactory.decodeResource(context.getResources(),image));
-        int height = (int) (bitmapMaster.getHeight()*0.3);
-        int width = (int) (bitmapMaster.getWidth()*0.3);
+        Bitmap bitmapMaster = compressBitmap(BitmapFactory.decodeResource(context.getResources(), image));
+        int height = (int) (bitmapMaster.getHeight() * 0.3);
+        int width = (int) (bitmapMaster.getWidth() * 0.3);
 
-        return decodeSampledBitmapFromResource(context.getResources(),image,width,height);
+        return decodeSampledBitmapFromResource(context.getResources(), image, width, height);
 
     }
 
-    public Bitmap compressBitmap(Bitmap bitmap){
+    public Bitmap compressBitmap(Bitmap bitmap) {
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 5, byteArrayOutputStream);
-        byte[] byteArray = byteArrayOutputStream .toByteArray();
-        return BitmapFactory.decodeByteArray(byteArray,0,byteArray.length);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 
     }
 

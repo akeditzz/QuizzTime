@@ -13,6 +13,7 @@ public class PreferenceManager {
     private Context mContext;
     private SharedPreferences settings ;
     private String preference_name;
+    private int Score;
 
     public PreferenceManager(Context context)
     {
@@ -25,6 +26,7 @@ public class PreferenceManager {
     {
         settings = mContext.getSharedPreferences(preference_name, 0);
         SharedPreferences.Editor editor = settings.edit();
+        editor.putString(mContext.getString(R.string.preference_username), "");
         editor.apply();
     }
 
@@ -41,6 +43,18 @@ public class PreferenceManager {
     public String getUserName()
     {
         return settings.getString(mContext.getString(R.string.preference_username), "");
+    }
+    
+    public void insertScore(){
+        Score = Score + 1;
+        settings = mContext.getSharedPreferences(preference_name, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt(mContext.getString(R.string.preference_score), Score);
+        editor.apply();
+    }
+
+    public int getScore(){
+        return settings.getInt(mContext.getString(R.string.preference_score), 0);
     }
 
 }

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.akeditzz.quizztime.ResultActivity">
+
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scaleType="centerCrop"
+    android:src="@drawable/quizz_bg_doodle"
+    android:alpha="0.7"
+    />
+
+    <LinearLayout
+        android:id="@+id/hero_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_48dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_quizz"
+            android:textSize="@dimen/textSize_40sp"
+            tools:fontFamily="@font/roboto_bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
+            android:text="@string/label_time"
+            android:textSize="@dimen/textSize_40sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_congrats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hero_text_view"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/textSize_16sp"
+        android:textColor="@android:color/black"
+        android:textAlignment="center"
+        />
+
+    <TextView
+        android:id="@+id/tv_label_yourscore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_your_score"
+        android:layout_below="@+id/tv_congrats"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/textSize_16sp"
+        android:textColor="@android:color/black"
+        />
+
+    <TextView
+        android:id="@+id/tv_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tv_label_yourscore"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:textSize="@dimen/textSize_64sp"
+        />
+
+    <Button
+        android:id="@+id/btn_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_home"
+        android:background="@drawable/btn_bg"
+        android:textColor="@android:color/white"
+        android:layout_below="@+id/tv_score"
+        android:layout_centerHorizontal="true"
+        android:layout_alignEnd="@+id/hero_text_view"
+        android:layout_alignStart="@+id/hero_text_view"
+        android:layout_marginTop="@dimen/margin_16dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/thankyou_mesg"
+        android:layout_alignParentBottom="true"
+        android:textAlignment="center"
+        android:textSize="@dimen/textSize_12sp"
+        android:layout_marginBottom="@dimen/margin_16dp"
+        />
+
+</RelativeLayout>
