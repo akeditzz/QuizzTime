@@ -10,11 +10,19 @@ import com.akeditzz.quizztime.R;
  */
 
 public class PreferenceManager {
+
+    // SharedPreference to save username
+    // For future enhancement
+
     private Context mContext;
     private SharedPreferences settings ;
     private String preference_name;
     private int Score;
 
+    /**
+     * SharedPreference setup
+     * @param context
+     */
     public PreferenceManager(Context context)
     {
         mContext= context;
@@ -22,14 +30,10 @@ public class PreferenceManager {
         settings = mContext.getSharedPreferences(preference_name, 0);
     }
 
-    public void clearData()
-    {
-        settings = mContext.getSharedPreferences(preference_name, 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putString(mContext.getString(R.string.preference_username), "");
-        editor.apply();
-    }
-
+    /**
+     * Inserting username to preference
+     * @param userName
+     */
     public void insertUserName(String userName)
     {
 
@@ -40,21 +44,13 @@ public class PreferenceManager {
 
     }
 
+    /**
+     * To get username from preference
+     * @return
+     */
     public String getUserName()
     {
         return settings.getString(mContext.getString(R.string.preference_username), "");
-    }
-    
-    public void insertScore(){
-        Score = Score + 1;
-        settings = mContext.getSharedPreferences(preference_name, 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putInt(mContext.getString(R.string.preference_score), Score);
-        editor.apply();
-    }
-
-    public int getScore(){
-        return settings.getInt(mContext.getString(R.string.preference_score), 0);
     }
 
 }

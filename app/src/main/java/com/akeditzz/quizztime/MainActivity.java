@@ -13,6 +13,7 @@ import com.akeditzz.quizztime.Utils.PreferenceManager;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Declaration
     Button btn_submit;
     EditText et_userName;
     PreferenceManager preferenceManager;
@@ -24,12 +25,11 @@ public class MainActivity extends AppCompatActivity {
 
         initView();
 
-
-
-
-
     }
 
+    /**
+     * Method to initialize view
+     */
     private void initView() {
         btn_submit = findViewById(R.id.btn_submit);
         btn_submit.setEnabled(false);
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         et_userName = findViewById(R.id.et_name);
         preferenceManager = new PreferenceManager(this);
 
+        //Editext textwatcher to enble and disable submit button
         et_userName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -64,14 +65,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                preferenceManager.insertUserName(et_userName.getText().toString().trim());
+                preferenceManager.insertUserName(et_userName.getText().toString().trim());// Saving username in Preference
                 next();
 
             }
         });
     }
 
+    /**
+     * Method to start next activity
+     */
     private void next(){
+        //inline code to start activity
         startActivity(new Intent(MainActivity.this,Main2Activity.class));
         finish();
     }

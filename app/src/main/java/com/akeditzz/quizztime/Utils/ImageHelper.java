@@ -13,13 +13,21 @@ import java.io.ByteArrayOutputStream;
 
 public class ImageHelper {
 
+    /**
+     * ImageHelper class to load blurr images in the background
+     */
+
     private static ImageHelper instance;
-    Context context;
+    private Context context;
 
 
     private ImageHelper() {
     }
 
+    /**
+     * Method to get instance of this class
+     * @return
+     */
     public static ImageHelper getInstance() {
         if (instance == null) {
             instance = new ImageHelper();
@@ -27,6 +35,14 @@ public class ImageHelper {
         return instance;
     }
 
+    // Compressing the image twice to get more blurr effect and also to maintain memory
+
+    /**
+     * Method to compress image
+     * @param context
+     * @param image
+     * @return
+     */
     public Bitmap getCompressedImage(Context context, int image) {
         this.context = context;
         Bitmap bitmapMaster = compressBitmap(BitmapFactory.decodeResource(context.getResources(), image));
@@ -37,7 +53,12 @@ public class ImageHelper {
 
     }
 
-    public Bitmap compressBitmap(Bitmap bitmap) {
+    /**
+     * Method to compress image
+     * @param bitmap
+     * @return
+     */
+    private Bitmap compressBitmap(Bitmap bitmap) {
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 5, byteArrayOutputStream);
@@ -46,8 +67,16 @@ public class ImageHelper {
 
     }
 
-    public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
-                                                         int reqWidth, int reqHeight) {
+    /**
+     * Method to get sample bitmap
+     * @param res
+     * @param resId
+     * @param reqWidth
+     * @param reqHeight
+     * @return
+     */
+    private static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
+                                                          int reqWidth, int reqHeight) {
 
         // First decode with inJustDecodeBounds=true to check dimensions
         final BitmapFactory.Options options = new BitmapFactory.Options();
@@ -62,7 +91,14 @@ public class ImageHelper {
         return BitmapFactory.decodeResource(res, resId, options);
     }
 
-    public static int calculateInSampleSize(
+    /**
+     * Method to calculate the best compress size
+     * @param options
+     * @param reqWidth
+     * @param reqHeight
+     * @return
+     */
+    private static int calculateInSampleSize(
             BitmapFactory.Options options, int reqWidth, int reqHeight) {
         // Raw height and width of image
         final int height = options.outHeight;

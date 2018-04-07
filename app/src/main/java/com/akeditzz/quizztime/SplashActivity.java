@@ -20,6 +20,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                //Inline code to start new activity
                 startActivity(new Intent(SplashActivity.this,MainActivity.class));
                 finish();
             }

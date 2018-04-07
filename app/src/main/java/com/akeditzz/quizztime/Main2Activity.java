@@ -19,6 +19,7 @@ import jp.wasabeef.blurry.Blurry;
 
 public class Main2Activity extends AppCompatActivity {
 
+    //Declaration
     Bitmap bitmapFinal;
     ImageView iv_blurr_bg;
 
@@ -58,12 +59,11 @@ public class Main2Activity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
             public void onPageSelected(int position) {
-                new SetimageOperation().execute(position);
+                new SetimageOperation().execute(position);// calling asynctask to set blurr background image
             }
 
             @Override
@@ -79,7 +79,7 @@ public class Main2Activity extends AppCompatActivity {
 
     private void initView() {
 
-        list = new ArrayList<>();
+        list = new ArrayList<>();// list to maintain questions
         setData();
 
         iv_blurr_bg = findViewById(R.id.iv_blurr_bg);
@@ -88,15 +88,26 @@ public class Main2Activity extends AppCompatActivity {
 
     }
 
+    /**
+     * To set particular page in viewpager
+     * @param i
+     */
     public void setCurrentItem(int i){
         mViewPager.setCurrentItem(i,true);
     }
 
+    /**
+     * Method to open ResultActivity
+     */
     public void openResultActivity(){
+        //Inline code to start activity
         startActivity(new Intent(this, ResultActivity.class).putExtra(getString(R.string.label_score),score));
         finish();
     }
 
+    /**
+     * Adding quizz related data
+     */
     private void setData() {
         list.add(new QuizzModel(getString(R.string.question_1), R.drawable.tajmahal, getString(R.string.option_agra), getString(R.string.option_mumbai), getString(R.string.option_bengalore), getString(R.string.option_hyderabad), getString(R.string.option_agra), radioButton,false));
         list.add(new QuizzModel(getString(R.string.question_2), R.drawable.ganga, getString(R.string.option_uttarakhand), getString(R.string.option_maharashtra), getString(R.string.option_uttar_pradesh), getString(R.string.option_bihar), getString(R.string.question2_answer), checkbox,false));
@@ -111,6 +122,9 @@ public class Main2Activity extends AppCompatActivity {
 
     }
 
+    /**
+     * AsyncTask to set background blurr image
+     */
     private class SetimageOperation extends AsyncTask<Integer, Void, Void> {
 
 
@@ -136,6 +150,10 @@ public class Main2Activity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method to get compressed image for background
+     * @param position
+     */
     private void setBg(int position) {
 
 
@@ -143,6 +161,9 @@ public class Main2Activity extends AppCompatActivity {
 
     }
 
+    /**
+     * Method to update Score
+     */
     public void UpdateScore(){
         score+=1;
     }

@@ -6,6 +6,10 @@ package com.akeditzz.quizztime.model;
 
 public class QuizzModel {
 
+    /**
+     * Model to maintain questions and answers
+     */
+
     private String question;
     private int image;
     private String option1;
@@ -16,6 +20,18 @@ public class QuizzModel {
     private boolean answered;
     private int type; // type to define which layout to be used in view, 0 for radiobuttons, 1 for checkbox, 2 for editext.
 
+    /**
+     * Constructor
+     * @param question
+     * @param image
+     * @param option1
+     * @param option2
+     * @param option3
+     * @param option4
+     * @param answer
+     * @param type
+     * @param answered
+     */
     public QuizzModel(String question, int image, String option1, String option2, String option3, String option4, String answer, int type,boolean answered) {
         this.question = question;
         this.image = image;

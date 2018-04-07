@@ -11,6 +11,7 @@ import com.akeditzz.quizztime.Utils.PreferenceManager;
 
 public class ResultActivity extends AppCompatActivity {
 
+    //Declaration
     int score;
     PreferenceManager preferenceManager;
     TextView tv_congrats,tv_score;
@@ -23,6 +24,9 @@ public class ResultActivity extends AppCompatActivity {
         initView();
     }
 
+    /**
+     * Method to initialize view
+     */
     private void initView() {
         preferenceManager = new PreferenceManager(this);
         score = getIntent().getIntExtra(getString(R.string.label_score),0);
@@ -38,6 +42,9 @@ public class ResultActivity extends AppCompatActivity {
         setData();
     }
 
+    /**
+     * Method to set display Final Result
+     */
     private void setData() {
         tv_score.setText(String.format(getString(R.string.int_resource), score));
         tv_congrats.setText(String.format(getString(R.string.mesg_congrats), preferenceManager.getUserName()));
