@@ -72,4 +72,5 @@
     <string name="thankyou_mesg">Thank you, your valuable feedback and suggestions would be appreciated.</string>
     <string name="int_resource">%d</string>
     <string name="mesg_congrats">Hey %s Congrats on completing the Quiz.</string>
+    <string name="mesg_already_answered">You have already answered this Question!</string>
 </resources>

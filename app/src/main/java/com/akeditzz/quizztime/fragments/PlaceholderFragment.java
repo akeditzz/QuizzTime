@@ -24,6 +24,10 @@ import com.akeditzz.quizztime.R;
 import com.akeditzz.quizztime.Utils.ImageHelper;
 import com.akeditzz.quizztime.Utils.PreferenceManager;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * A placeholder fragment containing a simple view.
  */
@@ -113,24 +117,31 @@ public class PlaceholderFragment extends Fragment {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String answer = Main2Activity.list.get(position).getAnswer();
-                boolean result = true;
-                if (rb_option1.isChecked()) {
-                    result = CheckRadioAnswer(answer, rb_option1.getText().toString());
-                } else if (rb_option2.isChecked()) {
-                    result = CheckRadioAnswer(answer, rb_option2.getText().toString());
-                } else if (rb_option3.isChecked()) {
-                    result = CheckRadioAnswer(answer, rb_option3.getText().toString());
-                } else if (rb_option4.isChecked()) {
-                    result = CheckRadioAnswer(answer, rb_option4.getText().toString());
-                } else {
-                    MakeToast(getContext().getString(R.string.mesg_select_option));
-                }
 
-                if (result) {
-                    AlertDialog(true, answer);
+                if (!Main2Activity.list.get(position).isAnswered()) {
+
+
+                    String answer = Main2Activity.list.get(position).getAnswer();
+                    boolean result = true;
+                    if (rb_option1.isChecked()) {
+                        result = CheckRadioAnswer(answer, rb_option1.getText().toString());
+                    } else if (rb_option2.isChecked()) {
+                        result = CheckRadioAnswer(answer, rb_option2.getText().toString());
+                    } else if (rb_option3.isChecked()) {
+                        result = CheckRadioAnswer(answer, rb_option3.getText().toString());
+                    } else if (rb_option4.isChecked()) {
+                        result = CheckRadioAnswer(answer, rb_option4.getText().toString());
+                    } else {
+                        MakeToast(getContext().getString(R.string.mesg_select_option));
+                    }
+
+                    if (result) {
+                        AlertDialog(true, answer);
+                    } else {
+                        AlertDialog(false, answer);
+                    }
                 } else {
-                    AlertDialog(false, answer);
+                    Toast.makeText(getContext(), R.string.mesg_already_answered, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -158,36 +169,37 @@ public class PlaceholderFragment extends Fragment {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String answer = Main2Activity.list.get(position).getAnswer();
-                boolean result = true;
 
-                if (cb_option1.isChecked()) {
-                    if (!CheckBoxAnswer(answer, cb_option1.getText().toString())) {
-                        result = false;
-                    }
-                }
-                if (cb_option2.isChecked()) {
-                    if (!CheckBoxAnswer(answer, cb_option2.getText().toString())) {
-                        result = false;
-                    }
-                }
-                if (cb_option3.isChecked()) {
-                    if (!CheckBoxAnswer(answer, cb_option3.getText().toString())) {
-                        result = false;
-                    }
-                }
-                if (cb_option4.isChecked()) {
-                    if (!CheckBoxAnswer(answer, cb_option4.getText().toString())) {
-                        result = false;
-                    }
-                }
+                if (!Main2Activity.list.get(position).isAnswered()) {
 
-                if (result) {
-                    AlertDialog(true, answer);
+                    String answer = Main2Activity.list.get(position).getAnswer();
+                    List<String> answerList = Arrays.asList(answer.split(","));
+                    List<String> selectedAnswer = new ArrayList<>();
+                    boolean result = true;
+
+                    if (cb_option1.isChecked()) {
+                        selectedAnswer.add(cb_option1.getText().toString());
+                    }
+                    if (cb_option2.isChecked()) {
+                        selectedAnswer.add(cb_option2.getText().toString());
+                    }
+                    if (cb_option3.isChecked()) {
+                        selectedAnswer.add(cb_option3.getText().toString());
+                    }
+                    if (cb_option4.isChecked()) {
+                        selectedAnswer.add(cb_option4.getText().toString());
+                    }
+
+                    result = CheckBoxAnswer(answerList, selectedAnswer);
+
+                    if (result) {
+                        AlertDialog(true, answer);
+                    } else {
+                        AlertDialog(false, answer);
+                    }
                 } else {
-                    AlertDialog(false, answer);
+                    Toast.makeText(getContext(), R.string.mesg_already_answered, Toast.LENGTH_SHORT).show();
                 }
-
 
             }
         });
@@ -215,43 +227,47 @@ public class PlaceholderFragment extends Fragment {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String enteredString = et_answer.getText().toString().trim();
-                String answer = Main2Activity.list.get(position).getAnswer();
 
-                if (!TextUtils.isEmpty(enteredString)) {
-                    if (enteredString.equalsIgnoreCase(answer)) {
-                        AlertDialog(true, answer);
+                if (!Main2Activity.list.get(position).isAnswered()) {
+
+                    String enteredString = et_answer.getText().toString().trim();
+                    String answer = Main2Activity.list.get(position).getAnswer();
+
+                    if (!TextUtils.isEmpty(enteredString)) {
+                        if (enteredString.equalsIgnoreCase(answer)) {
+                            AlertDialog(true, answer);
+                        } else {
+                            AlertDialog(false, answer);
+                        }
                     } else {
-                        AlertDialog(false, answer);
+                        MakeToast(getContext().getString(R.string.mesg_enter_your_ans));
+
                     }
+
                 } else {
-                    MakeToast(getContext().getString(R.string.mesg_enter_your_ans));
-
+                    Toast.makeText(getContext(), R.string.mesg_already_answered, Toast.LENGTH_SHORT).show();
                 }
-
-
             }
         });
 
     }
 
-    private boolean CheckBoxAnswer(String correctAnswer, String selectedAnswer) {
+    private boolean CheckBoxAnswer(List<String> correctAnswer, List<String> selectedAnswer) {
 
-        if (!correctAnswer.contains(selectedAnswer)) {
-            return false;
+
+        if (correctAnswer.size() == selectedAnswer.size()) {
+            selectedAnswer.removeAll(correctAnswer);
+            return selectedAnswer.size() == 0;
         } else {
-            return true;
+            return false;
         }
+
 
     }
 
     private boolean CheckRadioAnswer(String correctAnswer, String selectedAnswer) {
 
-        if (!selectedAnswer.equalsIgnoreCase(correctAnswer)) {
-            return false;
-        } else {
-            return true;
-        }
+        return selectedAnswer.equalsIgnoreCase(correctAnswer);
 
     }
 
@@ -279,7 +295,7 @@ public class PlaceholderFragment extends Fragment {
             buttonSubmit.setText(getContext().getString(R.string.label_continue));
             buttonSubmit.setBackground(getContext().getResources().getDrawable(R.drawable.btn_bg));
             if (!Main2Activity.list.get(position).isAnswered()) {
-                ((Main2Activity)getContext()).UpdateScore();
+                ((Main2Activity) getContext()).UpdateScore();
             }
             Main2Activity.list.get(position).setAnswered(true);
 
