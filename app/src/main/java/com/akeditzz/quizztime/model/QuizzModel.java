@@ -1,10 +1,13 @@
 package com.akeditzz.quizztime.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Akshay on 25-03-2018.
  */
 
-public class QuizzModel {
+public class QuizzModel implements Parcelable{
 
     /**
      * Model to maintain questions and answers
@@ -44,6 +47,30 @@ public class QuizzModel {
         this.answered = answered;
     }
 
+    private QuizzModel(Parcel in) {
+        question = in.readString();
+        image = in.readInt();
+        option1 = in.readString();
+        option2 = in.readString();
+        option3 = in.readString();
+        option4 = in.readString();
+        answer = in.readString();
+        answered = in.readByte() != 0;
+        type = in.readInt();
+    }
+
+    public static final Creator<QuizzModel> CREATOR = new Creator<QuizzModel>() {
+        @Override
+        public QuizzModel createFromParcel(Parcel in) {
+            return new QuizzModel(in);
+        }
+
+        @Override
+        public QuizzModel[] newArray(int size) {
+            return new QuizzModel[size];
+        }
+    };
+
     public int getType() {
         return type;
     }
@@ -82,5 +109,23 @@ public class QuizzModel {
 
     public void setAnswered(boolean answered) {
         this.answered = answered;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(question);
+        parcel.writeInt(image);
+        parcel.writeString(option1);
+        parcel.writeString(option2);
+        parcel.writeString(option3);
+        parcel.writeString(option4);
+        parcel.writeString(answer);
+        parcel.writeByte((byte) (answered ? 1 : 0));
+        parcel.writeInt(type);
     }
 }

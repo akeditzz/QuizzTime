@@ -73,4 +73,6 @@
     <string name="int_resource">%d</string>
     <string name="mesg_congrats">Hey %s Congrats on completing the Quiz.</string>
     <string name="mesg_already_answered">You have already answered this Question!</string>
+    <string name="key_list">List</string>
+    <string name="key_score">Score</string>
 </resources>

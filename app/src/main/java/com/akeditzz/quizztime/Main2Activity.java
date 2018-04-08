@@ -156,7 +156,6 @@ public class Main2Activity extends AppCompatActivity {
      */
     private void setBg(int position) {
 
-
         bitmapFinal = ImageHelper.getInstance().getCompressedImage(this, list.get(position).getImage());
 
     }
@@ -168,5 +167,26 @@ public class Main2Activity extends AppCompatActivity {
         score+=1;
     }
 
+    /**
+     * To save list and score data when screen is rotated
+     * @param outState
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(getString(R.string.key_list),list);
+        outState.putInt(getString(R.string.key_score),score);
+    }
 
+    /**
+     * To retrieve list and score from savedInstance.
+     * @param savedInstanceState
+     */
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        list = new ArrayList<>();
+        list = savedInstanceState.getParcelableArrayList(getString(R.string.key_list));
+        score = savedInstanceState.getInt(getString(R.string.key_score));
+    }
 }
