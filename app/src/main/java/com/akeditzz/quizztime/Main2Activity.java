@@ -90,7 +90,7 @@ public class Main2Activity extends AppCompatActivity {
 
     /**
      * To set particular page in viewpager
-     * @param i
+     * @param i viewpager position
      */
     public void setCurrentItem(int i){
         mViewPager.setCurrentItem(i,true);
@@ -152,7 +152,7 @@ public class Main2Activity extends AppCompatActivity {
 
     /**
      * Method to get compressed image for background
-     * @param position
+     * @param position get position number to set bg
      */
     private void setBg(int position) {
 
@@ -169,7 +169,7 @@ public class Main2Activity extends AppCompatActivity {
 
     /**
      * To save list and score data when screen is rotated
-     * @param outState
+     * @param outState saves instance
      */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -180,7 +180,7 @@ public class Main2Activity extends AppCompatActivity {
 
     /**
      * To retrieve list and score from savedInstance.
-     * @param savedInstanceState
+     * @param savedInstanceState contains instance
      */
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
